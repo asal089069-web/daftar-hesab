@@ -27,7 +27,7 @@ jobs:
           sed -i 's/^orientation = .*/orientation = portrait/' buildozer.spec
       - name: Build APK
         run: |
-          buildozer -v android debug
+         yes | buildozer -v android debug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
