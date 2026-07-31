@@ -22,14 +22,16 @@ jobs:
       - name: Install python dependencies
         run: |
           pip install --upgrade pip
-          pip install "cython<3.0" buildozer
+          pip install "cython==0.29.33" "buildozer==1.5.0"
 
       - name: Init buildozer
         run: |
           if [ ! -f buildozer.spec ]; then buildozer init; fi
-          sed -i 's/^requirements = .*/requirements = python3==3.11.6,kivy==2.2.1,arabic_reshaper,python-bidi/' buildozer.spec
+          sed -i 's/^requirements = .*/requirements = python3,kivy==2.1.0,arabic_reshaper,python-bidi/' buildozer.spec
           sed -i 's/^#source.include_exts = .*/source.include_exts = py,png,jpg,kv,atlas,ttf/' buildozer.spec
           sed -i 's/^orientation = .*/orientation = portrait/' buildozer.spec
+          sed -i 's/^#android.api = .*/android.api = 33/' buildozer.spec
+          sed -i 's/^#android.minapi = .*/android.minapi = 21/' buildozer.spec
 
       - name: Build APK
         run: |
